@@ -44,7 +44,7 @@ async function fetchJSON(url) {
 }
 
 const Trip = (props) => {
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(7*60);
   const [animation] = useState({});
   const [autoTrip, setAutoTrip] = useState(null);
   const [autoPax, setAutoPax] = useState(null);
@@ -94,7 +94,7 @@ const Trip = (props) => {
   }, [maxTripTime, maxPaxTime]);
 
   /* -------------------- 애니메이션 -------------------- */
-  const step = useCallback((t) => (t > maxTime ? 0 : t + 0.01 * 0.5), [maxTime]); // speed=0.5
+  const step = useCallback((t) => (t > maxTime ? 0 : t + 0.01 * 2), [maxTime]); // speed=0.5
   const animate = useCallback(() => {
     setTime((t) => step(t));
     animation.id = window.requestAnimationFrame(animate);
@@ -280,7 +280,7 @@ const Trip = (props) => {
 
       <h1 className="time">TIME : {`${hh} : ${mm}`}</h1>
 
-      <Slider id="slider" value={time} min={0} max={maxTime} onChange={onSlider} track="inverted" />
+      <Slider id="slider" value={time} min={7*60} max={maxTime} onChange={onSlider} track="inverted" />
     </div>
   );
 };
